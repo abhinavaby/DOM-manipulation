@@ -1,0 +1,22 @@
+body{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+#img{
+    
+    width:400px;
+    height:300px;
+    border: 3px solid blue;
+}
+#btn{
+    padding: 10px;
+    background-color: blue;
+    color:white;
+    border:none;
+    border-radius: 5px;
+    cursor: pointer;
+    
+}

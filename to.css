@@ -1,0 +1,27 @@
+p{
+    text-align: center;
+    font-size: 18px;
+    color: blue;
+    margin-top: 20px;
+    font-family: Arial, sans-serif;
+}
+body{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    
+    
+
+
+}
+div{
+    width: 400px;
+    height: 300px;
+    border: 3px solid blue;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 16px;
+}

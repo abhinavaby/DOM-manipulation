@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Nice Border Todo</title>
+    <style>
+        /* Modern background and centering */
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            background: #f0f2f5; 
+            display: flex; 
+            justify-content: center; 
+            padding-top: 80px; 
+        }
+
+        /* The "Nice Border" Container */
+        .todo-card { 
+            background: white; 
+            padding: 30px; 
+            width: 350px;
+            /* Nice thick border with rounded corners */
+            border: 4px solid #6c5ce7; 
+            border-radius: 20px; 
+            /* Subtle shadow to make it pop */
+            box-shadow: 0 10px 25px rgba(108, 92, 231, 0.2); 
+        }
+
+        h3 { color: #2d3436; margin-top: 0; text-align: center; }
+
+        .input-group { display: flex; gap: 10px; margin-bottom: 20px; }
+
+        input { 
+            flex: 1; padding: 12px; 
+            border: 2px solid #dfe6e9; 
+            border-radius: 8px; outline: none; 
+        }
+        
+        input:focus { border-color: #a29bfe; }
+
+        button { 
+            padding: 10px 20px; 
+            background: #6c5ce7; 
+            color: white; border: none; 
+            border-radius: 8px; cursor: pointer; 
+            font-weight: bold;
+        }
+
+        li { 
+            background: #f9f9f9; 
+            margin-bottom: 8px; 
+            padding: 12px; 
+            border-radius: 8px; 
+            list-style: none;
+            border-left: 5px solid #6c5ce7; /* Accent border for items */
+            transition: 0.3s;
+        }
+
+        .done { text-decoration: line-through; color: #b2bec3; border-left-color: #b2bec3; }
+    </style>
+</head>
+<body>
+
+    <div class="todo-card">
+        <h3>My To-Do's</h3>
+        <div class="input-group">
+            <input type="text" id="taskInput" placeholder="Add a task...">
+            <button onclick="addTask()">Add</button>
+        </div>
+        <ul id="taskList" style="padding: 0;"></ul>
+    </div>
+
+    <script>
+        function addTask() {
+            var input = document.getElementById("taskInput");
+            if (input.value.trim() === "") return;
+
+            var li = document.createElement("li");
+            li.innerText = input.value;
+            li.onclick = function() { this.classList.toggle("done"); };
+            li.ondblclick = function() { this.remove(); };
+
+            document.getElementById("taskList").appendChild(li);
+            input.value = "";
+        }
+    </script>
+</body>
+</html>
