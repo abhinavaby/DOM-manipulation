@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Clicker Game</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f2f5;
+        }
+
+        #game-container {
+            text-align: center;
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        #click-btn {
+            font-size: 5rem;
+            cursor: pointer;
+            transition: transform 0.1s;
+            user-select: none;
+        }
+
+        #click-btn:active {
+            transform: scale(0.9);
+        }
+
+        .stats {
+            font-size: 1.5rem;
+            margin: 1rem 0;
+            color: #333;
+        }
+
+        button.upgrade {
+            padding: 10px 20px;
+            font-size: 1rem;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button.upgrade:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="game-container">
+        <h1>Clicker Quest</h1>
+        <div class="stats">Score: <span id="score">0</span></div>
+        
+        <!-- The Main Clickable Item -->
+        <div id="click-btn">🍪</div>
+        
+        <p>Click the cookie!</p>
+        
+        <hr>
+        
+        <div class="stats">Multiplier: x<span id="multiplier">1</span></div>
+        <button id="upgrade-btn" class="upgrade">Buy Multiplier (Cost: 10)</button>
+    </div>
+
+    <script>
+        // Game State
+        let score = 0;
+        let multiplier = 1;
+        let upgradeCost = 10;
+
+        // Elements
+        const scoreDisplay = document.getElementById('score');
+        const multiplierDisplay = document.getElementById('multiplier');
+        const clickBtn = document.getElementById('click-btn');
+        const upgradeBtn = document.getElementById('upgrade-btn');
+
+        // Logic: Clicking the item
+        clickBtn.addEventListener('click', () => {
+            score += 1 * multiplier;
+            updateDisplay();
+        });
+
+        // Logic: Buying an upgrade
+        upgradeBtn.addEventListener('click', () => {
+            if (score >= upgradeCost) {
+                score -= upgradeCost;
+                multiplier++;
+                upgradeCost = Math.round(upgradeCost * 1.5);
+                updateDisplay();
+            }
+        });
+
+        // Update the UI
+        function updateDisplay() {
+            scoreDisplay.textContent = score;
+            multiplierDisplay.textContent = multiplier;
+            upgradeBtn.textContent = `Buy Multiplier (Cost: ${upgradeCost})`;
+            
+            // Disable upgrade button if player can't afford it
+            upgradeBtn.disabled = score < upgradeCost;
+        }
+    </script>
+
+</body>
+</html>
