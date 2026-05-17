@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple API Fetch Example</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f9;
+            margin: 0;
+        }
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            text-align: center;
+            max-width: 400px;
+        }
+        button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        #output {
+            margin-top: 20px;
+            font-style: italic;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <h2>Daily Advice Generator</h2>
+        <button id="fetchBtn">Get Advice</button>
+        <p id="output">Click the button to get some advice!</p>
+    </div>
+
+    <script>
+        // Target the HTML elements
+        const button = document.getElementById('fetchBtn');
+        const output = document.getElementById('output');
+
+        // Function to call the API
+        async function getAdvice() {
+            output.textContent = "Loading...";
+            
+            try {
+                // Fetch data from a free public API
+                const response = await fetch('https://adviceslip.com');
+                
+                // Convert the response to JSON format
+                const data = await response.json();
+                
+                // Inject the API data into our HTML paragraph
+                output.textContent = `"${data.slip.advice}"`;
+            } catch (error) {
+                // Fallback text if the API fails or is down
+                output.textContent = "Oops! Could not fetch advice right now.";
+                console.error("Error fetching data:", error);
+            }
+        }
+
+        // Trigger the function when the user clicks the button
+        button.addEventListener('click', getAdvice);
+    </script>
+
+</body>
+</html>
